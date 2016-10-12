@@ -19,8 +19,9 @@ def average_p(time): #does averages for all values
         averages.append(total/count)
     return(averages)
 
-def sleep_index(sleep,activity): #appends sleep index of each point to list
+def sleep_index(activity): #appends sleep index of each point to list
     item = average_p(activity)
+    sleep = []
     for average in item:
         if average > 200:
             sleep.append(10)
@@ -44,16 +45,21 @@ def sleep_index(sleep,activity): #appends sleep index of each point to list
             sleep.append(8)
         elif 184.4 <= average < 200:
             sleep.append(9)
+    return sleep
 
-def full_csv_second(CSV, light_exists, off_wrist_exists):
+def full_csv_second(CSV, light_exists,off_wrist):
+    
+# HEY ELLIE LOOK HERE LOOK HERE K off-wrist, if this data is not here, then just assume it is ON wrist. There is nothing telling u that off-wrist exists. U have to code that in.
     index = 0
     data = open(CSV,"w",newline = "")  #rewriting the sleep CSV
     sleep_index = []
     average = get_activity_list("sleepfile.csv")
-    sleep_index(sleep_index,average)
+    sleep_index = sleep_index(average)
     movingaverages = average_p(average)
     while index < (len(time_stamps)):
         light_data = [line[index],epoch[index],date_stamp[index],time_stamps[index]]+[off_wrist_status[index]]*int(off_wrist_exists)+[activity_count[index],marker[index]]+[white_light_values[index],red_light_values[index],green_light_values[index],blue_light_values[index]]*int(light_exists)+[sleep_wake[index],interval_status[index],sleep_status[index],sleep_index[index],movingaverages[index]]
         write = csv.writer(data,delimiter=',')
         write.writerow(light_data)
         index +=1
+        
+full_csv_second("sleepfile.csv",lightpresent, UHHHHHHHHHH)  # See line 52 for UHHH explanation.
