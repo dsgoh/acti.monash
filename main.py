@@ -1,5 +1,5 @@
-class MyError(Exception):
-    pass
+# class MyError(Exception):
+#     pass
 try:
     import os
     import epochcheck
@@ -40,18 +40,23 @@ try:
     if lightpresent != "Activity Only":
         import LightData
 
+    # writes to "sleepindex.csv" with a copy of data from "sleepfile.csv"
+    # adds the columns "sleepindex" and "movingaverages" to this. (movingaverages is the average of ACTIVITY
     import sleepindex
-    import dylangraph  # crosses fingers
-    import summarynadine # cross hearts
 
-f = open("worked.txt", "w")
-f.write("True")
-f.close()
-except MyError:
-    pass
-except Exception as e:
-    f = open("Error_Log","w")
-    f.write(str(e))
+    # uses "sleepindex.csv" to plot
+    import dylangraph
+
+    # cross hearts
+    import summarynadine
+
+    f = open("worked.txt", "w")
+    f.write("True")
     f.close()
-    raise Exception
+# except MyError:
+#     pass
+except Exception as e:
+    ef = open("Error_Log.txt","w")
+    ef.write(str(e))
+    ef.close()
 
