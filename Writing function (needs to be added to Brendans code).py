@@ -1,3 +1,5 @@
+#Light Version
+
 import csv
 
 def csv_writer(data,path): #writing function where the path is the file you would like to open
