@@ -1,8 +1,10 @@
 #This code is run early on by the program.
 #It takes in a file containing the epoch by epoch data,
 #and systematically checks it for flaws
-#if it detects a flaw, and output file is written
-#which is then intrepreted by the GUI and forced the user
+#if it detects a flaw, if will log that
+#once it has finished scanning for flaws, it will write any
+#problems it found (if any) to a file.
+#This file is then intrepreted by the GUI and forces the user
 #to select a new file or correct the issues.
 
 
@@ -17,7 +19,8 @@ crashes = {} #Log of the crashes and lines it happened at
 #(normally as an integer) and adds it to the crash log
 #@Params
 #msg: A string that explains the error. Displayed by the GUI
-#line: The line number in the file the program detected the fault on
+#line: The line number in the file the program detected the fault on.
+#Despite the fact that the line is stored, it isn't currently used or outputed to the file
 def addCrash(msg,line):
     crashes[msg] = crashes.get(msg,[])+[str(line)]
 
@@ -53,13 +56,12 @@ if not crashes:
         addCrash("Columns Should Be Seperated By Commas",lineNumber)
     else:
         #This checks if there is any missing columns in the data
-
         header = header.replace('"', "") #Removes quotation marks from the document. Needed because sometimes data values are encased
         #by quotation marks, which messes up typecasting to int/floats and checking the names
         names = header.split(",")
         names = [name.lower() for name in header.split(",")] #Makes everything case-insensitive
         if "Off-Wrist Status".lower() in names:
-            indexes["Off-Wrist Status"] = names.index["Off-Wrist Status".lower()] #Only will check off-wrist if it is present
+            indexes["Off-Wrist Status"] = names.index["Off-Wrist Status".lower()] #Doesn't require off-wrist to be present, but will remember if it is
         for needed in ["Epoch","Activity","Sleep/Wake"]+["White Light","Red Light","Green Light","Blue Light"]*useLight:
             #Only checks if the data we are going to use is present.
             if needed.lower() not in names:
@@ -109,8 +111,8 @@ f = open("crashes.txt","w")
 if crashes:
     firstLine = 1
     for crash in crashes:
-        f.write("\n"*(not firstLine)+crash)
+        f.write("\n"*(not firstLine)+crash+","+" ".join(crashes[crash]))
         firstLine = 0
 else:
-    f.write("None")
+    f.write("None") #Special value to tell the GUI that all worked
 f.close()

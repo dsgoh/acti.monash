@@ -1,13 +1,25 @@
 import statistics
 import csv
+
+#This file takes in a csv file and outputs 2 csv files and 8 graphs as png's
+#This will only run if light data is available.
+#This program using the epoch by epoch data to work out some information about different light level independent of time
+#this includes: Probability of Sleep by light level and information about
+#time spent asleep after being exposed to a certain light level (does not have to be continuous)
+#The graphs are show a bar plot of the probability and expected time spent asleep for all colours across all light levels
+#The second file is the raw data version of these graphs
+#The first file contains a more expansive data set for the time spent asleep, covering the amount of times a certain time spent
+#asleep was observed for any light level. This is then graphed as a heat map in a different part of the code (NOTE heat map
+#not yet implemented)
+
 f = open("sleepfile.txt")
 names = [columnName.lower() for columnName in (f.readline().replace('"',"")).split(",")]
-info = {} #Contains the light level and sleep status for all times
+info = {}
 rangeInfo = [[]for i in range(0,4)]
-indexes={}
+indexes={} #Stores what vairable in located in which column
 neededColumns = ["Off-Wrist Status","Epoch","Activity","White Light","Red Light","Green Light","Blue Light","Sleep/Wake"]
 if neededColumns[0].lower() in names:
-    indexes[neededColumns[0]]=names.index[neededColumns[0].lower()]
+    indexes[neededColumns[0]]=names.index[neededColumns[0].lower()] #Remembers the place of off-wrist if it is present
 for needed in neededColumns[1:]:
     indexes[needed]=names.index(needed.lower())
 for data in csv.reader(f):
@@ -15,31 +27,36 @@ for data in csv.reader(f):
         colours=[]
         for colour in neededColumns[3:7]:
             colours.append(float(data[indexes[colour]]))
+        #Complies 2 data sets, info stores the infomation by time, rangeInfo by colour and intensity
         info[int(data[1])]=(colours,int(data[11]))
         for colour in range(4):
             rangeInfo[colour].append((colours[colour],int(data[1])))
 colCount = 0
 result = [[] for i in range(4)]
 totalAsleep = [0 for i in range(4)]
-colourTrans = {3: ["Blue",(0,0,1)], 2: ["Green",(0,1,0)], 1: ["Red",(1,0,0)], 0: ["White",(173/255,173/255,173/255)]}
+colourTrans = {3: ["Blue",(0,0,1)], 2: ["Green",(0,1,0)], 1: ["Red",(1,0,0)], 0: ["White",(173/255,173/255,173/255)]} #Used to translate counters into related strings/RGB values
 colourLength = []
 for rangeCol in rangeInfo:
     minval = min(rangeCol)
     maxval = max(rangeCol)
-    rangeCol = [val for val in sorted(rangeCol) if val[0]!=maxval[0] and val[0]!=minval[0]]
+    rangeCol = [val for val in sorted(rangeCol) if val[0]!=maxval[0] and val[0]!=minval[0]] #Removes all instances of the min and max values
+    #This is because the sensor will have a limited sensitivity, and if the values go beyond that sensitivity it will be left at the min/max
+    #Since this isn't actually accurate, these values are excluded. This ISN'T biasing the data, this is only making a statement about what we know for sure
     colourLength.append(len(rangeCol))
-    ranges = 60
+    ranges = 60 #Arbitary number, chosen to make the heat map close to square (because the other azis has 61 values)
     change = len(rangeCol)/ranges
     i = 0
     bins = []
-    while len(bins)<ranges: #float equalities
+    while len(bins)<ranges:
+        #This takes all the data and sorts it into groups (also referred to as "bins" or "ranges") of equal size
+        #the data is sorted by light level beforehand, so the data values across groups continuously increases.
         bins.append(rangeCol[round(i*change):round((i+1)*change)-1])
         i+=1
     maxProb = (0,0)
     binCount = 0
     for bin in bins:
         counter = 0
-        freqHist = {i: 0 for i in range(0,60)}
+        freqHist = {i: 0 for i in range(0,60)} #This contains the data for the heat map.
         full = []
         for point in bin:
             freq = 0
@@ -55,9 +72,7 @@ for rangeCol in rangeInfo:
         prob = 100*counter/len(bin)
         if prob > maxProb[0]:
             maxProb = (prob,binCount)
-        #print("\n--------------Summary of Sleep when %s Light Level is Between %s and %s (photons/s*m^2)--------------"%(colourTrans[colCount],round(bin[0][0]),round(bin[-1][0])))
-
-        #print("Probablity of Sleep: %s%%\nAverage number of counts spent asleep in the next hour after being exposed to this light level\nMean: %s, Median: %s, Mode.txt: %s"%((round(100*(100*counter/len(bin)))/100),round(100*statistics.mean(full))/100,statistics.median(full), statistics.mode(full)))
+        #This next part calculates the lower and upper bound for each range, such that all light levels fall into a range
         if binCount != 0:
             lBound = (bins[binCount-1][-1][0]+bins[binCount][0][0])/2
         else:
@@ -72,9 +87,10 @@ csvfile = csv.writer(f)
 csvfile.writerow(["Colour", "Lower Bound of Range", "Upper Bound of Range", "Spike Size", "Occurences"])
 f2 = open("LightInfo.csv", "w", newline="")
 csvfile2 = csv.writer(f2)
-csvfile2.writerow(["Colour", "Bin Number","Lower Bound of Range", "Upper Bound of Range", "Probablity of Sleep", "Average Counts spent Asleep"])
+csvfile2.writerow(["Colour", "Bin Number","Lower Bound of Range", "Upper Bound of Range", "Probablity of Sleep", "Expected Counts spent Asleep"])
 bin = 1
 lines = [[]for i in range(4)]
+#Writes everything to the files. LightInfo contains probablity of Sleep/Expected Counts Asleep, while LightCluster holds the info for the heat map
 for colour in range(4):
     colInfo = result[colour]
     colourLineInfo = [[]for i in range(2)]
@@ -88,6 +104,8 @@ for colour in range(4):
     lines[colour] = colourLineInfo
 import matplotlib.pyplot as plt
 import math
+#Graphs all the data.
+#Note that when i=0, the code is working with probablity of sleep, and when i=1, its working with counts asleep
 for colour in range(4):
     for i in range(2):
         ax = plt.gca()
@@ -105,8 +123,10 @@ for colour in range(4):
             if i==0:
                 plt.plot([lines[colour][i][0][0], lines[colour][i][-1][0]],[100 * totalAsleep[colour] / colourLength[colour], 100 * totalAsleep[colour] / colourLength[colour]],color=(0, 0, 0))
         if i==0:
-            plt.ylabel("Percentage (%%) Chance of Sleep, with Expected Chance Prior")
+            plt.ylabel("Percentage (%) Chance of Sleep, with Expected Chance Prior")
         else:
             plt.ylabel("Expected time (in minutes) spent asleep\nafter being exposed to light level in an hour")
+
+        #Saves the current graph, then clears the graph so that the next starts on a clear slate
         plt.savefig("%s %s.png"%(colourTrans[colour][0],("Probablity","Count_Asleep")[i]))
         plt.gcf().clear()
