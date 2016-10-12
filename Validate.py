@@ -38,6 +38,12 @@ if not crashes:
     indexes = {} #Keeps track of what column each part of the data is located in
     lineNumber = 1
 
+    #Checks whether it needs to check for light level
+    modeFile = open("Mode.txt")
+    useLight = 1
+    if modeFile.readline()=="Activity Only":
+        useLight = 0
+
     #This next section checks for any flaws in the initial line, which is expected to contain the column names
     if header == "":
         addCrash("Empty File",lineNumber)
@@ -52,7 +58,9 @@ if not crashes:
         #by quotation marks, which messes up typecasting to int/floats and checking the names
         names = header.split(",")
         names = [name.lower() for name in header.split(",")] #Makes everything case-insensitive
-        for needed in ["Epoch","Off-Wrist Status","Activity","White Light","Red Light","Green Light","Blue Light","Sleep/Wake"]:
+        if "Off-Wrist Status".lower() in names:
+            indexes["Off-Wrist Status"] = names.index["Off-Wrist Status".lower()] #Only will check off-wrist if it is present
+        for needed in ["Epoch","Activity","Sleep/Wake"]+["White Light","Red Light","Green Light","Blue Light"]*useLight:
             #Only checks if the data we are going to use is present.
             if needed.lower() not in names:
                 addCrash("Missing Vital Column " + needed,lineNumber)
@@ -72,28 +80,29 @@ if not crashes:
             lineNumber += 1
             if len(line)!= linelength:
                 addCrash("Number of values per line must be consistent with header line",lineNumber)
-            try:
-                if float(line[indexes["Epoch"]])<0:
-                    addCrash("Epoch values should be positive",lineNumber)
-                elif float(line[indexes["Epoch"]])<=lastVal:
-                    addCrash("Epoch values must always increase",lineNumber)
-                else:
-                    lastVal = float(line[indexes["Epoch"]])
-            except:
-                #Called if the program can't turn the data in the epoch column into a float.
-                addCrash("Epoch values need to be numeric",lineNumber)
-            if line[indexes["Off-Wrist Status"]] not in ("0", "1"): #I use a string comparasion to avoid causing crashes
-                # typecasting to an integer
-                addCrash("Off-Wrist Status must be either 0 or 1",lineNumber)
-            for var in ["Activity","White Light","Red Light","Green Light","Blue Light"]:
+            else:
                 try:
-                    if float(line[indexes[var]])<0:
-                        addCrash(var+" values should be positive",lineNumber)
+                    if float(line[indexes["Epoch"]])<0:
+                        addCrash("Epoch values should be positive",lineNumber)
+                    elif float(line[indexes["Epoch"]])<=lastVal:
+                        addCrash("Epoch values must always increase",lineNumber)
+                    else:
+                        lastVal = float(line[indexes["Epoch"]])
                 except:
-                    if line[indexes[var]].lower() != "NaN".lower():
-                        addCrash(var+" values should always be numeric or NaN (Infinity/Inf not accepted)",lineNumber)
-            if line[indexes["Sleep/Wake"]].lower() not in ("0", "1", "NaN".lower()):
-                addCrash("Sleep/Wake must be either 0 or 1 or NaN",lineNumber)
+                    #Called if the program can't turn the data in the epoch column into a float.
+                    addCrash("Epoch values need to be numeric",lineNumber)
+                if "Off-Wrist Status" in indexes and line[indexes["Off-Wrist Status"]].replace(" ","") not in ("0", "1"): #I use a string comparasion to avoid causing crashes
+                    # typecasting to an integer
+                    addCrash("Off-Wrist Status must be either 0 or 1",lineNumber)
+                for var in ["Activity"]+["White Light","Red Light","Green Light","Blue Light"]*useLight:
+                    try:
+                        if float(line[indexes[var]])<0:
+                            addCrash(var+" values should be positive",lineNumber)
+                    except:
+                        if line[indexes[var]].lower() != "NaN".lower():
+                            addCrash(var+" values should always be numeric or NaN (Infinity/Inf not accepted)",lineNumber)
+                if line[indexes["Sleep/Wake"]].replace(" ","").lower() not in ("0", "1", "NaN".lower()):
+                    addCrash("Sleep/Wake must be either 0 or 1 or NaN",lineNumber)
 
 #This next section goes ahead and write the crash log to a file so it can be interpreted by the GUI, which runs in Java
 f = open("crashes.txt","w")
