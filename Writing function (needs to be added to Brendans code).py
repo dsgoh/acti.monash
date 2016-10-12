@@ -9,20 +9,39 @@ def csv_writer(data,path): #writing function where the path is the file you woul
             writer.writerow(item)
 
 
-line = fullist[0]
-epoch = fulllist[1]
-date_stamp = fullist[2]
-time_stamps = fullist[3]
-off_wrist_status = fullist[4]
-activity_count = fullist[5]
-marker = fullist[6]
-white_light_values = fullist[7]
-red_light_values = fullist[8]
-green_light_values = fullist[9]
-blue_light_values = fullist[10]
-sleep_wake = fullist[11]
-interval_status = fullist[12]
-sleep_status = fullist[13]
+
+if len(fulllist) == 13:
+    line = fullist[0]
+    epoch = fulllist[1]
+    date_stamp = fullist[2]
+    time_stamps = fullist[3]
+    off_wrist_status = fullist[4]
+    activity_count = fullist[5]
+    marker = fullist[6]
+    white_light_values = fullist[7]
+    red_light_values = fullist[8]
+    green_light_values = fullist[9]
+    blue_light_values = fullist[10]
+    sleep_wake = fullist[11]
+    interval_status = fullist[12]
+    sleep_status = fullist[13]
+else:
+    line = fullist[0]
+    epoch = fulllist[1]
+    date_stamp = fullist[2]
+    time_stamps = fullist[3]
+    off_wrist_status = [off_wrist]
+    for i in range(len(line)):
+        off_wrist_status.append(1)
+    activity_count = fullist[5]
+    marker = fullist[6]
+    white_light_values = fullist[7]
+    red_light_values = fullist[8]
+    green_light_values = fullist[9]
+    blue_light_values = fullist[10]
+    sleep_wake = fullist[11]
+    interval_status = fullist[12]
+    sleep_status = fullist[13]
 
 index = 0
 data = open("sleepfile.csv","w",newline = "")  #writing the sleep CSV
