@@ -13,7 +13,7 @@ def average_p(time): #does averages for all values
         total = 0
         count = 0
         for k in range(-10,11):
-            if i-k>=0 and i-k<len(time):
+            if i-k>=0 and i-k<len(time) and time[i-k]!="NaN":
                 total += time[i-k]
                 count+=1
         averages.append(total/count)
