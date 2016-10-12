@@ -109,7 +109,7 @@ f = open("crashes.txt","w")
 if crashes:
     firstLine = 1
     for crash in crashes:
-        f.write("\n"*(not firstLine)+crash+","+" ".join(crashes[crash]))
+        f.write("\n"*(not firstLine)+crash)
         firstLine = 0
 else:
     f.write("None")
