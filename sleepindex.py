@@ -45,7 +45,7 @@ def sleep_index(sleep,activity): #appends sleep index of each point to list
         elif 184.4 <= average < 200:
             sleep.append(9)
 
-def full_csv_second(CSV):
+def full_csv_second(CSV, light_exists, off_wrist_exists):
     index = 0
     data = open(CSV,"w",newline = "")  #rewriting the sleep CSV
     sleep_index = []
@@ -53,7 +53,7 @@ def full_csv_second(CSV):
     sleep_index(sleep_index,average)
     movingaverages = average_p(average)
     while index < (len(time_stamps)):
-        light_data = [line[index],epoch[index],date_stamp[index],time_stamps[index],off_wrist_status[index],activity_count[index],marker[index],white_light_values[index],red_light_values[index],green_light_values[index],blue_light_values[index],sleep_wake[index],interval_status[index],sleep_status[index],sleep_index[index],movingaverages[index]]
+        light_data = [line[index],epoch[index],date_stamp[index],time_stamps[index]]+[off_wrist_status[index]]*int(off_wrist_exists)+[activity_count[index],marker[index]]+[white_light_values[index],red_light_values[index],green_light_values[index],blue_light_values[index]]*int(light_exists)+[sleep_wake[index],interval_status[index],sleep_status[index],sleep_index[index],movingaverages[index]]
         write = csv.writer(data,delimiter=',')
         write.writerow(light_data)
         index +=1
