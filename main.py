@@ -34,7 +34,7 @@ try:
         import LightData
 
     # writes to "sleepindex.csv" with a copy of data from "sleepfile.csv"
-    # adds the columns "sleepindex" and "movingaverages" to this. (movingaverages is the average of ACTIVITY
+    # adds the columns "sleepindex" and "movingaverages" to this. (movingaverages is the average of ACTIVITY)
     import CalculateSleepIndex
     CalculateSleepIndex.full_csv_second("sleepfile.csv")
     # uses "sleepindex.csv" to plot
