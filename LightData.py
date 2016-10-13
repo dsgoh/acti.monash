@@ -1,29 +1,29 @@
 import statistics
 import csv
 
-#This file takes in a csv file and outputs 2 csv files and 8 graphs as png's
-#This will only run if light data is available.
-#This program using the epoch by epoch data to work out some information about different light level independent of time
-#this includes: Probability of Sleep by light level and information about
-#time spent asleep after being exposed to a certain light level (does not have to be continuous)
-#The graphs are show a bar plot of the probability and expected time spent asleep for all colours across all light levels
-#The second file is the raw data version of these graphs
-#The first file contains a more expansive data set for the time spent asleep, covering the amount of times a certain time spent
-#asleep was observed for any light level. This is then graphed as a heat map in a different part of the code (NOTE heat map
-#not yet implemented)
+# This file takes in a csv file and outputs 2 csv files and 8 graphs as png's
+# This will only run if light data is available.
+# This program using the epoch by epoch data to work out some information about different light level independent of time
+# this includes: Probability of Sleep by light level and information about
+# time spent asleep after being exposed to a certain light level (does not have to be continuous)
+# The graphs are show a bar plot of the probability and expected time spent asleep for all colours across all light levels
+# The second file is the raw data version of these graphs
+# The first file contains a more expansive data set for the time spent asleep, covering the amount of times a certain time spent
+# asleep was observed for any light level. This is then graphed as a heat map in a different part of the code (NOTE heat map
+# not yet implemented)
 
 f = open("sleepfile.csv")
 names = [columnName.lower() for columnName in (f.readline().replace('"',"")).split(",")]
 info = {}
 rangeInfo = [[]for i in range(0,4)]
-indexes={} #Stores what vairable in located in which column
+indexes={} # Stores what vairable in located in which column
 neededColumns = ["Off-Wrist Status","Epoch","Activity","White Light","Red Light","Green Light","Blue Light","Sleep/Wake"]
 if neededColumns[0].lower() in names:
     indexes[neededColumns[0]]=names.index[neededColumns[0].lower()] #Remembers the place of off-wrist if it is present
 for needed in neededColumns[1:]:
     indexes[needed]=names.index(needed.lower().replace(" ",""))
 for data in csv.reader(f):
-    if ("Off-Wrist Status" not in indexes or int(data[indexes["Off-Wrist Status"]])==0) and "NaN" not in [data[indexes[column]] for column in neededColumns[1:]]:
+    if ("Off-Wrist Status" not in indexes or int(data[indexes["Off-Wrist Status"]])==0) and "nan" not in [data[indexes[column]] for column in neededColumns[1:]]:
         colours=[]
         for colour in neededColumns[3:7]:
             colours.append(float(data[indexes[colour]]))
