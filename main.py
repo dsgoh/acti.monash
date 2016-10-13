@@ -1,7 +1,11 @@
 import sys
 import os
+import traceback
+
+
 class MyError(Exception):
-     pass
+    pass
+
 try:
     import ExtractSections
     name = "data"
@@ -16,8 +20,9 @@ try:
 
     fatalerror = False
 
-    #details = ExtractData.details(f)  # extracts details to file "details.txt"
-    ExtractSections.error_gateway(name+"."+extension,"crashes.txt","Mode.txt","sleepfile.csv")
+    import details  # extracts details to file "details.txt"
+    details.details(f)
+    ExtractSections.error_gateway(name+"."+extension, "crashes.txt","Mode.txt","sleepfile.csv")
     error = open("crashes.txt").readline()
     if error!="None":
         raise MyError
@@ -33,21 +38,23 @@ try:
     import CalculateSleepIndex
     CalculateSleepIndex.full_csv_second("sleepfile.csv")
     # uses "sleepindex.csv" to plot
-    #import dylangraph
+    # import dylangraph
 
     # cross hearts
-    #import summarynadine
+    # import summarynadine
 
     f = open("worked.txt", "w")
     f.write("True")
     f.close()
+    ef = open("Error_Log.txt", "w")
+    ef.write("")
+    ef.close()
 except MyError:
     pass
 except Exception:
     exc_type, exc_obj, exc_tb = sys.exc_info()
 
-    e=sys.exc_info()
     ef = open("Error_Log.txt","w")
-    ef.write(str(exc_obj)+" "+ str(os.path.split(exc_tb.tb_frame.f_code.co_filename)[1])+" "+str(exc_tb.tb_lineno))
+    traceback.print_exc(file = ef)
     ef.close()
 

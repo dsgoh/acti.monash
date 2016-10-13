@@ -1,29 +1,26 @@
-def get_activity_list(data, index): #gets activity data and places into list
-    activity = []
-    with open(data,"r") as file:
-        for line in file:
-            headers = file.readline()
-            datalist = line.split(",")
-            activity.append(datalist[index])
+def get_activity_list(data, index):  # gets activity data and places into list
+    activity = [line[index] for line in data]
     return activity
 
-def average_p(time, off_wrist): #does averages for all values
-    averages=[]
+
+def average_p(time, off_wrist):  # does averages for all values
+    averages = []
     for i in range(len(time)):
         total = 0
         count = 0
-        for k in range(-10,11):
-            if i-k>=0 and i-k<len(time) and time[i-k].lower()!="nan" and (not off_wrist or not off_wrist[i-k]):
+        for k in range(-10, 11):
+            if 0 <= i-k < len(time) and time[i-k].lower() != "nan" and (not off_wrist or not off_wrist[i-k]):
                 total += time[i-k]
-                count+=1
+                count += 1
         if count != 0:
             averages.append(total/count)
         else:
             averages.append("nan")
-    return(averages)
+    return averages
 
-def sleep_index(activity): #appends sleep index of each point to list
-    item = average_p(activity)
+
+def sleep_index(activity, off_wrist):  # appends sleep index of each point to list
+    item = average_p(activity, off_wrist)
     sleep = []
     for average in item:
         if average == "nan":
@@ -52,21 +49,30 @@ def sleep_index(activity): #appends sleep index of each point to list
             sleep.append(9)
     return sleep
 
+
 def full_csv_second(CSV):
     f = open(CSV)
+
     header = f.readline().lower().split(",")
     actindex = header.index("activity")
     offdata = []
-    data = open(CSV).readlines()
-    if "off-wrist status" in header:
-        offindex = header.index("off-wrist status")
-        offdata = [data[offindex] for line in data]
-    writer = open(CSV,"w",newline = "")  #rewriting the sleep CSV
-    sleep_index = []
-    average = get_activity_list(CSV, actindex)
-    sleep_index = sleep_index(average)
-    movingaverages = average_p(average, offdata)
-    counter = 0
-    for line in data:
-        writer.write(line+sleep_index[counter]+movingaverages[counter])
-        counter += 1
+    data = f.readlines()
+
+    if "off-wriststatus" in header:
+        offindex = header.index("off-wriststatus")
+        offdata = [line[offindex] for line in data]
+
+    writer = open("sleepindexedit.csv", "w", newline="")  # rewriting the sleep CSV
+    writer.write(",".join(header))
+
+    activity = get_activity_list(data, actindex)
+    sleep_indexes = sleep_index(activity, offdata)
+    movingaverages = average_p(activity, offdata)
+
+    for line in range(len(data)):
+        writer.write(str(data[line]).strip()+","+str(sleep_indexes[line])+","+str(movingaverages[line]) + "\n")
+
+    writer.close()
+    f.close()
+
+# TODO Fix the off data algorithm - rather than having it as a parameter
