@@ -62,7 +62,7 @@ def full_csv_second(CSV):
         offindex = header.index("off-wriststatus")
         offdata = [line[offindex] for line in data]
 
-    writer = open("sleepindexedit.csv", "w", newline="")  # rewriting the sleep CSV
+    writer = open("sleepindex.csv", "w", newline="")  # rewriting the sleep CSV
     writer.write(",".join(header))
 
     activity = get_activity_list(data, actindex)
