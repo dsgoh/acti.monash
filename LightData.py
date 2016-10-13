@@ -12,7 +12,7 @@ import csv
 #asleep was observed for any light level. This is then graphed as a heat map in a different part of the code (NOTE heat map
 #not yet implemented)
 
-f = open("sleepfile.txt")
+f = open("sleepfile.csv")
 names = [columnName.lower() for columnName in (f.readline().replace('"',"")).split(",")]
 info = {}
 rangeInfo = [[]for i in range(0,4)]
@@ -21,7 +21,7 @@ neededColumns = ["Off-Wrist Status","Epoch","Activity","White Light","Red Light"
 if neededColumns[0].lower() in names:
     indexes[neededColumns[0]]=names.index[neededColumns[0].lower()] #Remembers the place of off-wrist if it is present
 for needed in neededColumns[1:]:
-    indexes[needed]=names.index(needed.lower())
+    indexes[needed]=names.index(needed.lower().replace(" ",""))
 for data in csv.reader(f):
     if ("Off-Wrist Status" not in indexes or int(data[indexes["Off-Wrist Status"]])==0) and "NaN" not in [data[indexes[column]] for column in neededColumns[1:]]:
         colours=[]

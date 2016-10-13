@@ -44,7 +44,7 @@ if not crashes:
     #Checks whether it needs to check for light level
     modeFile = open("Mode.txt")
     useLight = 1
-    if modeFile.readline()=="Activity Only":
+    if modeFile.readline()=="Activity":
         useLight = 0
 
     #This next section checks for any flaws in the initial line, which is expected to contain the column names
@@ -64,10 +64,10 @@ if not crashes:
             indexes["Off-Wrist Status"] = names.index["Off-Wrist Status".lower()] #Doesn't require off-wrist to be present, but will remember if it is
         for needed in ["Epoch","Activity","Sleep/Wake"]+["White Light","Red Light","Green Light","Blue Light"]*useLight:
             #Only checks if the data we are going to use is present.
-            if needed.lower() not in names:
+            if needed.lower().replace(" ","") not in names:
                 addCrash("Missing Vital Column " + needed,lineNumber)
             else:
-                indexes[needed]=names.index(needed.lower())
+                indexes[needed]=names.index(needed.lower().replace(" ",""))
     if not crashes:
         #Only continues if there are no problems with the header
         csvfile = csv.reader(f)
