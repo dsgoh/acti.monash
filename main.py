@@ -38,7 +38,8 @@ try:
     import CalculateSleepIndex
     CalculateSleepIndex.full_csv_second("sleepfile.csv")
     # uses "sleepindex.csv" to plot
-    # import dylangraph
+    # import plotter
+    # plotter.plot("sleepindex.csv")
 
     # cross hearts
     # import summarynadine
