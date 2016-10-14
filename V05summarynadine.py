@@ -182,3 +182,9 @@ def summary(file):
     avg_get_up_time = ":".join([str(part) for part in time_avg(rest_end_times)])
     avg_time_in_bed = ":".join([str(part) for part in time_avg(rest_durations)])
     avg_total_sleep_hours = ":".join([str(part) for part in time_avg(sleep_durations)])
+    
+    out = open("summary.csv","w")
+    out.write(min_bedtime+","+min_get_up_time+","+min_time_in_bed+","+min_total_sleep_hours+","+min_onset_latency+","+min_efficiency+","+min_waso+","+min_awakenings)
+    out.write(max_bedtime+","+max_get_up_time+","+max_time_in_bed+","+max_total_sleep_hours+","+max_onset_latency+","+max_efficiency+","+max_waso+","+max_awakenings)
+    out.write(avg_bedtime+","+avg_get_up_time+","+avg_time_in_bed+","+avg_total_sleep_hours+","+avg_onset_latency+","+avg_efficiency+","+avg_waso+","+avg_awakenings)
+    out.close()
