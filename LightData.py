@@ -39,7 +39,7 @@ colourLength = []
 for rangeCol in rangeInfo:
     minval = min(rangeCol)
     maxval = max(rangeCol)
-    rangeCol = [val for val in sorted(rangeCol) if val[0]!=maxval[0] and val[0]!=minval[0]] #Removes all instances of the min and max values
+    rangeCol = [val for val in sorted(rangeCol) if val[0]!=maxval[0] and (val[0]!=minval[0] or colCount == 0)] #Removes all instances of the min and max values
     #This is because the sensor will have a limited sensitivity, and if the values go beyond that sensitivity it will be left at the min/max
     #Since this isn't actually accurate, these values are excluded. This ISN'T biasing the data, this is only making a statement about what we know for sure
     colourLength.append(len(rangeCol))
