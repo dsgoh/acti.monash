@@ -22,6 +22,8 @@ try:
     import details  # extracts details to file "details.txt"
     details.details(f)
 
+
+
     ExtractSections.error_gateway(name+"."+extension, "crashes.txt","Mode.txt","sleepfile.csv")
     error = open("crashes.txt").readline()
     if error!="None":
@@ -39,15 +41,13 @@ try:
     CalculateSleepIndex.full_csv_second("sleepfile.csv")
 
     import V05summarynadine
-    V05summarynadine.summary(f)
+    V05summarynadine.summary(name+"."+extension)
+
     # uses "sleepindex.csv" to plot
     import plotter
     plotter.plot("sleepindex.csv")
 
-
-    # cross hearts
-    # import summarynadine
-
+    f.close()
     f = open("worked.txt", "w")
     f.write("True")
     f.close()
