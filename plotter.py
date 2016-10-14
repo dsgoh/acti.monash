@@ -22,11 +22,11 @@ def plot(file):
 
     print(actCol)
     firstRow = f.readline().split(",")
-    firstTime = firstRow[timeCol] #must remove this from CSV entirely
-    firstDate = firstRow[dateCol] #must remove this from CSV entirely
+    firstTime = firstRow[timeCol] # must remove this from CSV entirely
+    firstDate = firstRow[dateCol] # must remove this from CSV entirely
 
     s = firstDate + " " + firstTime
-    #FIRST TIME/DATE print(time.mktime(datetime.datetime.strptime(s, "%d/%m/%Y %H:%M:%S").timetuple()))
+    # FIRST TIME/DATE print(time.mktime(datetime.datetime.strptime(s, "%d/%m/%Y %H:%M:%S").timetuple()))
     unixTimes = []
     allTheRows = []
     actList = []
@@ -48,7 +48,7 @@ def plot(file):
 
 
     for act in range(0, len(actList)):
-        if actList[act] == "NaN":
+        if actList[act] == "nan":
             actList[act] = 0
 
     trace2 = go.Scatter(

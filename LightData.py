@@ -128,5 +128,5 @@ for colour in range(4):
             plt.ylabel("Expected time (in minutes) spent asleep\nafter being exposed to light level in an hour")
 
         #Saves the current graph, then clears the graph so that the next starts on a clear slate
-        plt.savefig("%s %s.png"%(colourTrans[colour][0],("Probablity","Count_Asleep")[i]))
+        plt.savefig("%s %s.png"%(colourTrans[colour][0],("Probability","Count_Asleep")[i]))
         plt.gcf().clear()

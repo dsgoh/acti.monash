@@ -73,6 +73,8 @@ def error_gateway(inputfilename, errorfilename, datatypefile, outputfile):
         xerrorfile.write("Error: Actiwatch Data Properties not present in file. Please submit a valid file.")
         xerrorfile.close()
         return("Error")
+    else:
+        xerrorfile.write("None")
 
 #Finding out which type of data it is
     datatype = listdata[logmodeline]
@@ -103,6 +105,7 @@ def error_gateway(inputfilename, errorfilename, datatypefile, outputfile):
 #Converting Time from 12 to 24 hour
     for x in newfulllist:
         x[3] = time_24hr(x[3])
+
 
 #Writing to a csv file in proper format
     for a in newfulllist:
