@@ -44,7 +44,7 @@ if not crashes:
     #Checks whether it needs to check for light level
     modeFile = open("Mode.txt")
     useLight = 1
-    if modeFile.readline()=="Activity":
+    if modeFile.readline()=="Activity Only":
         useLight = 0
 
     #This next section checks for any flaws in the initial line, which is expected to contain the column names

@@ -1,5 +1,5 @@
 def get_activity_list(data, index):  # gets activity data and places into list
-    activity = [line[index] for line in data]
+    activity = [line.split(",")[index] for line in data]
     return activity
 
 
@@ -9,9 +9,10 @@ def average_p(time, off_wrist):  # does averages for all values
         total = 0
         count = 0
         for k in range(-10, 11):
-            if 0 <= i-k < len(time) and time[i-k].lower() != "nan" and (not off_wrist or not off_wrist[i-k]):
-                total += time[i-k]
-                count += 1
+            if 0 <= i-k < len(time) and time[i-k] and time[i-k]!="nan":
+                if not off_wrist or int(off_wrist[i-k])==0:
+                    total += int(time[i-k])
+                    count += 1
         if count != 0:
             averages.append(total/count)
         else:
@@ -19,13 +20,12 @@ def average_p(time, off_wrist):  # does averages for all values
     return averages
 
 
-def sleep_index(activity, off_wrist):  # appends sleep index of each point to list
-    item = average_p(activity, off_wrist)
+def sleep_index(item, off_wrist):  # appends sleep index of each point to list
     sleep = []
     for average in item:
-        if average == "nan":
+        if str(average) == "nan":
             sleep.append("nan")
-        elif average > 200:
+        elif average >= 200:
             sleep.append(10)
         elif average < 60:
             sleep.append(0)
@@ -47,6 +47,8 @@ def sleep_index(activity, off_wrist):  # appends sleep index of each point to li
             sleep.append(8)
         elif 184.4 <= average < 200:
             sleep.append(9)
+        else:
+            raise Exception
     return sleep
 
 
@@ -60,17 +62,16 @@ def full_csv_second(CSV):
 
     if "off-wriststatus" in header:
         offindex = header.index("off-wriststatus")
-        offdata = [line[offindex] for line in data]
-
+        offdata = [line.split(",")[offindex] for line in data]
     writer = open("sleepindex.csv", "w", newline="")  # rewriting the sleep CSV
-    writer.write(",".join(header))
+    writer.write(",".join(header).strip()+"sleepindex,movingaverage\n")
 
     activity = get_activity_list(data, actindex)
-    sleep_indexes = sleep_index(activity, offdata)
     movingaverages = average_p(activity, offdata)
+    sleep_indexes = sleep_index(movingaverages, offdata)
 
     for line in range(len(data)):
-        writer.write(str(data[line]).strip()+","+str(sleep_indexes[line])+","+str(movingaverages[line]) + "\n")
+        writer.write(str(data[line]).strip()+str(sleep_indexes[line])+","+str(movingaverages[line]) + "\n")
 
     writer.close()
     f.close()
