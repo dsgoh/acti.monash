@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "D:/documents/computing/finalcomputingassignment/acti.monash-master/main.py", line 41, in <module>
+    plotter.plot("sleepindex.csv")
+  File "D:\documents\computing\finalcomputingassignment\acti.monash-master\plotter.py", line 43, in plot
+    unixTimes.append(time.mktime(datetime.datetime.strptime(smth, "%d/%m/%Y %H:%M:%S").timetuple()))
+  File "C:\Users\Paro\Anaconda3\lib\_strptime.py", line 510, in _strptime_datetime
+    tt, fraction = _strptime(data_string, format)
+  File "C:\Users\Paro\Anaconda3\lib\_strptime.py", line 346, in _strptime
+    data_string[found.end():])
+ValueError: unconverted data remains: pm
