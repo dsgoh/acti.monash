@@ -5,6 +5,27 @@
 #3. The name of a text file or similar capable of holding the data type - activity and light or no light
 #4. The name of a csv file capable of being written to that will hold the clean data (eg. "Output_data.csv")
 
+#Time Conversion function. From 12 Hour to 24 Hour
+def time_24hr(time):
+    if 'pm' in time:
+        time = time.strip(' pm')
+        time = time.split(':')
+        if int(time[0]) < 12:
+            time[0] = int(time[0]) + 12
+            time[0] = str(time[0])
+        time = ":".join(time)
+        return(time)
+    elif 'am' in time:
+        time = time.strip(' am')
+        time = time.split(':')
+        if int(time[0]) == 12:
+            time[0] = 0
+            time[0] = str(time[0])
+        time = ":".join(time)
+        return(time)
+    else:
+        return(time)
+
 def error_gateway(inputfilename, errorfilename, datatypefile, outputfile):
 
 #Creation of variables
@@ -52,8 +73,6 @@ def error_gateway(inputfilename, errorfilename, datatypefile, outputfile):
         xerrorfile.write("Error: Actiwatch Data Properties not present in file. Please submit a valid file.")
         xerrorfile.close()
         return("Error")
-    else:
-        xerrorfile.write("None")
 
 #Finding out which type of data it is
     datatype = listdata[logmodeline]
@@ -61,7 +80,7 @@ def error_gateway(inputfilename, errorfilename, datatypefile, outputfile):
 #Datatype presented as either "Activity Only" or "Activity
 #A single word will be written to the data file; either "Activity" if ONLY activity or "Light" if Activity AND Light
     if "Only" in datatype:
-        xdatatype.write("Activity Only")
+        xdatatype.write("Activity")
         xdatatype.close()
     else:
         xdatatype.write("Light")
@@ -76,10 +95,14 @@ def error_gateway(inputfilename, errorfilename, datatypefile, outputfile):
     for a in listdata:
         ablist = []
         for b in a:
-            b = b.replace('"', '').replace(" ", "")
+            b = b.replace('"', '')
             b = b.lower()
             ablist.append(b)
         newfulllist.append(ablist)
+
+#Converting Time from 12 to 24 hour
+    for x in newfulllist:
+        x[3] = time_24hr(x[3])
 
 #Writing to a csv file in proper format
     for a in newfulllist:
