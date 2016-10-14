@@ -21,6 +21,7 @@ try:
 
     import details  # extracts details to file "details.txt"
     details.details(f)
+
     ExtractSections.error_gateway(name+"."+extension, "crashes.txt","Mode.txt","sleepfile.csv")
     error = open("crashes.txt").readline()
     if error!="None":
@@ -36,6 +37,7 @@ try:
     # adds the columns "sleepindex" and "movingaverages" to this. (movingaverages is the average of ACTIVITY)
     import CalculateSleepIndex
     CalculateSleepIndex.full_csv_second("sleepfile.csv")
+
     # uses "sleepindex.csv" to plot
     import plotter
     plotter.plot("sleepindex.csv")

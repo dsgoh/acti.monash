@@ -54,7 +54,6 @@ def sleep_index(item, off_wrist):  # appends sleep index of each point to list
 
 def full_csv_second(CSV):
     f = open(CSV)
-
     header = f.readline().lower().split(",")
     actindex = header.index("activity")
     offdata = []
@@ -69,7 +68,6 @@ def full_csv_second(CSV):
     activity = get_activity_list(data, actindex)
     movingaverages = average_p(activity, offdata)
     sleep_indexes = sleep_index(movingaverages, offdata)
-
     for line in range(len(data)):
         writer.write(str(data[line]).strip()+str(sleep_indexes[line])+","+str(movingaverages[line]) + "\n")
 
