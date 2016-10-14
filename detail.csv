@@ -1,52 +1,48 @@
-Filename: S:\MNHS-SPP\Circadia\Researcher Folders\Current\Sletten\8690601_27_06_2013_4_00_00_PM_New_Analysis.csv                          
-Analysis Name: New Analysis                          
-Identity: 8690601                          
-Initials: AT                          
-Full Name: Not Entered                          
-Street Address: Not Entered                          
-City State Zip Country: Not Entered                          
-Phone: Not Entered                          
-Gender: Female                          
-Date of Birth: 30/03/2001                          
-Age (at time of export file creation): 15 years                         
-Age (at start of data collection): 12 years                         
-Actiwatch Type: Actiwatch 64                          
-Data Collection Start Date: 27/06/2013                          
-Data Collection Start Time: 4:00:00 PM                          
-Data Collection End Date: 18/07/2013                          
-Data Collection End Time: 11:33:30 AM                          
-Logging Mode: Activity Only                          
-Time Zone: (GMT+10:00) Brisbane                          
-Time Zone Offset: +10:00 hours:minutes                         
-Epoch Length: 30 seconds                         
-Number of Data Samples: 59947 samples                         
-Number of Data Samples per Day: 2880 samples per day                         
-Number of Days: 20.81 days                         
-Battery Installed Date: 12/02/2013                          
-Number of Processor Resets: 0                          
-Actiwatch Serial Number: V963259                          
-Actiwatch Firmware Version: 96                          
-Activity Calibration Factor: 110                          
-White Calibration Factor: Not Applicable                          
-Red Calibration Factor: Not Applicable                          
-Green Calibration Factor: Not Applicable                          
-Blue Calibration Factor: Not Applicable                          
-Wake Threshold Selection: Medium                          
-Wake Threshold Value: 40 activity counts                         
-Sleep Interval Detection Algorithm: By minutes scored as immobile                          
-Sleep Onset Setting: 10 minutes                         
-Sleep End Setting: 10 minutes                         
-Actogram Start Hour: 12:00 PM                          
-White Light Threshold: Not Applicable                          
-Red Light Threshold: Not Applicable                          
-Green Light Threshold: Not Applicable                          
-Blue Light Threshold: Not Applicable                          
-Line: Line Number                          
-Epoch: Epoch Number (since midnight prior to start of data collection)                          
-Date: Date (start of epoch)                          
-Time: Time (start of epoch)                          
-Activity: Activity (counts)                          
-Marker: 1 means Event Marker button was pressed                          
-Sleep/Wake: Sleep/Wake Score (0=Sleep; 1=Wake)                          
-Interval Status: Interval Status: Active; Rest; Sleep; or Excluded                          
-S/W Status: Forced Sleep/Wake Interval Status                          
+Filename: S:\MNHS-SPP\Circadia\Researcher Folders\Current\Sletten\8690601_27_06_2013_4_00_00_PM_New_Analysis.csv
+Analysis Name: New Analysis
+Identity: 8690601
+Initials: AT
+Gender: Female
+Date of Birth: 30/03/2001
+Age (at time of export file creation): 15 years
+Age (at start of data collection): 12 years
+Actiwatch Type: Actiwatch 64
+Data Collection Start Date: 27/06/2013
+Data Collection Start Time: 4:00:00 PM
+Data Collection End Date: 18/07/2013
+Data Collection End Time: 11:33:30 AM
+Logging Mode: Activity Only
+Time Zone: (GMT+10:00) Brisbane
+Time Zone Offset: +10:00 hours:minutes
+Epoch Length: 30 seconds 
+Number of Data Samples: 59947 samples
+Number of Data Samples per Day: 2880 samples per day
+Number of Days: 20.81 days
+Battery Installed Date: 12/02/2013
+Number of Processor Resets: 0
+Actiwatch Serial Number: V963259
+Actiwatch Firmware Version: 96
+Activity Calibration Factor: 110
+White Calibration Factor: Not Applicable
+Red Calibration Factor: Not Applicable
+Green Calibration Factor: Not Applicable
+Blue Calibration Factor: Not Applicable
+Wake Threshold Selection: Medium
+Wake Threshold Value: 40.00 activity counts
+Sleep Interval Detection Algorithm: By minutes scored as immobile
+Sleep Onset Setting: 10 minutes
+Sleep End Setting: 10 minutes
+Actogram Start Hour: 12:00 PM
+White Light Threshold: Not Applicable
+Red Light Threshold: Not Applicable
+Green Light Threshold: Not Applicable
+Blue Light Threshold: Not Applicable
+Line: Line Number
+Epoch: Epoch Number (since midnight prior to start of data collection)
+Date: Date (start of epoch)
+Time: Time (start of epoch)
+Activity: Activity (counts)
+Marker: 1 means Event Marker button was pressed
+Sleep/Wake: Sleep/Wake Score (0=Sleep; 1=Wake)
+Interval Status: Interval Status: Active; Rest; Sleep; or Excluded
+S/W Status: Forced Sleep/Wake Interval Status
