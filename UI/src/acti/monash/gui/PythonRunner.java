@@ -121,7 +121,7 @@ public class PythonRunner
 
 			if (statusFile.exists())
 			{
-				BufferedReader br = new BufferedReader(new FileReader(errorLog));
+				BufferedReader br = new BufferedReader(new FileReader(statusFile));
 				String line;
 				String status = "";
 				while ((line = br.readLine()) != null)

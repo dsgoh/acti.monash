@@ -1,0 +1,6 @@
+SUMMARY STATISTICS
+
+,Bed Time,Get Up Time,Time in Bed (hours),Total Sleep Time (hours),Onset Latency (minutes),Sleep Efficiency (Percent),WASO (minutes),#Awak
+Min,20:8:0,6:5:0,8:10:0,8:10:0,0.00,66.57,14.00,13
+Max,23:5:0,10:1:0,12:2:0,9:47:0,156.00,91.97,96.00,56
+Avg,22:16:7,31:8:30,31:47:37,32:14:30,9.04,81.11,65.25,41.67

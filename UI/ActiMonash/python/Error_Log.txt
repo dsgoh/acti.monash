@@ -1,1 +1,19 @@
-python: can't open file 'main.py': [Errno 2] No such file or directory
+Traceback (most recent call last):
+  File "C:\Users\Alex\Anaconda3\lib\site-packages\plotly\plotly\plotly.py", line 703, in get
+    return_data = json.loads(res.content)
+  File "C:\Users\Alex\Anaconda3\lib\json\__init__.py", line 312, in loads
+    s.__class__.__name__))
+TypeError: the JSON object must be str, not 'bytes'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "main.py", line 45, in <module>
+    import plotter
+  File "C:\Users\Alex\Desktop\UI\ActiMonash\python\plotter.py", line 109, in <module>
+    py.image.save_as(fig, filename="full.png")
+  File "C:\Users\Alex\Anaconda3\lib\site-packages\plotly\plotly\plotly.py", line 787, in save_as
+    img = cls.get(figure_or_data, format, width, height, scale)
+  File "C:\Users\Alex\Anaconda3\lib\site-packages\plotly\plotly\plotly.py", line 707, in get
+    raise exceptions.PlotlyError("The response "
+plotly.exceptions.PlotlyError: The response from plotly could not be translated.
