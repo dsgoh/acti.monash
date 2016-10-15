@@ -1,4 +1,4 @@
-line,epoch,date,time,activity,marker,sleep/wake,interval status,s/w status,sleepindex,movingaverage
+line,epoch,date,time,activity,marker,sleep/wake,intervalstatus,s/wstatus,sleepindex,movingaverage
 1,1920,27/06/2013,16:00:00,0,0,nan,active,nan,0,0.0
 2,1921,27/06/2013,16:00:30,0,0,nan,active,nan,0,0.0
 3,1922,27/06/2013,16:01:00,0,0,nan,active,nan,0,0.0

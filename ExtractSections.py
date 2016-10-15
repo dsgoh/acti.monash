@@ -97,7 +97,7 @@ def error_gateway(inputfilename, errorfilename, datatypefile, outputfile):
     for a in listdata:
         ablist = []
         for b in a:
-            b = b.replace('"', '')
+            b = b.replace('"', '').replace(" ","")
             b = b.lower()
             ablist.append(b)
         newfulllist.append(ablist)
