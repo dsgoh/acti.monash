@@ -1,0 +1,52 @@
+Filename: S:\MNHS-SPP\Circadia\Researcher Folders\Current\Sletten\D01_5_07_2011_1_57_00_PM_New_Analysis.csv
+Analysis Name: New Analysis
+Identity: D01
+Gender: Male
+Date of Birth: 1/01/1965
+Age (at time of export file creation): 51 years
+Age (at start of data collection): 46 years
+Actiwatch Type: Actiwatch Spectrum
+Data Collection Start Date: 5/07/2011
+Data Collection Start Time: 1:57:00 PM
+Data Collection End Date: 29/07/2011
+Data Collection End Time: 11:51:00 AM
+Logging Mode: Activity  RGB  and Photopic Light
+Time Zone: (UTC+07:00) Krasnoyarsk
+Time Zone Offset: +07:00 hours:minutes
+Epoch Length: 60 seconds (1 minute)
+Number of Data Samples: 34434 samples
+Number of Data Samples per Day: 1440 samples per day
+Number of Days: 23.91 days
+Battery Installed Date: 16/09/2010
+Number of Processor Resets: 0
+Actiwatch Serial Number: S04461
+Actiwatch Firmware Version: 01.01.0009
+Activity Calibration Factor: 102
+White Calibration Factor: Not Available
+Red Calibration Factor: 19542
+Green Calibration Factor: 24108
+Blue Calibration Factor: 18959
+Wake Threshold Selection: Medium
+Wake Threshold Value: 40.00 activity counts
+Sleep Interval Detection Algorithm: By minutes scored as immobile
+Sleep Onset Setting: 10 minutes
+Sleep End Setting: 10 minutes
+Actogram Start Hour: 12:00 PM
+White Light Threshold: 1000.00 lux
+Red Light Threshold: 2.84E+15 photons per square centimeter per second
+Green Light Threshold: 2.55E+15 photons per square centimeter per second
+Blue Light Threshold: 2.12E+15 photons per square centimeter per second
+Line: Line Number
+Epoch: Epoch Number (since midnight prior to start of data collection)
+Date: Date (start of epoch)
+Time: Time (start of epoch)
+Off-Wrist Status: 1 means device was not being worn
+Activity: Activity (counts)
+Marker: 1 means Event Marker button was pressed
+White Light: White Light
+Red Light: Red Light
+Green Light: Green Light
+Blue Light: Blue Light
+Sleep/Wake: Sleep/Wake Score (0=Sleep; 1=Wake)
+Interval Status: Interval Status: Active; Rest; Sleep; or Excluded
+S/W Status: Forced Sleep/Wake Interval Status
