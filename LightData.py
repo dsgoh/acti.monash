@@ -19,7 +19,7 @@ rangeInfo = [[]for i in range(0,4)]
 indexes={} # Stores what vairable in located in which column
 neededColumns = ["Off-Wrist Status","Epoch","Activity","White Light","Red Light","Green Light","Blue Light","Sleep/Wake"]
 if neededColumns[0].lower() in names:
-    indexes[neededColumns[0]]=names.index[neededColumns[0].lower()] #Remembers the place of off-wrist if it is present
+    indexes[neededColumns[0]]=names.index(neededColumns[0].lower()) #Remembers the place of off-wrist if it is present
 for needed in neededColumns[1:]:
     indexes[needed]=names.index(needed.lower().replace(" ",""))
 for data in csv.reader(f):

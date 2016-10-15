@@ -61,7 +61,7 @@ if not crashes:
         names = header.split(",")
         names = [name.lower() for name in header.split(",")] #Makes everything case-insensitive
         if "Off-Wrist Status".lower() in names:
-            indexes["Off-Wrist Status"] = names.index["Off-Wrist Status".lower()] #Doesn't require off-wrist to be present, but will remember if it is
+            indexes["Off-Wrist Status"] = names.index("Off-Wrist Status".lower()) #Doesn't require off-wrist to be present, but will remember if it is
         for needed in ["Epoch","Activity","Sleep/Wake"]+["White Light","Red Light","Green Light","Blue Light"]*useLight:
             #Only checks if the data we are going to use is present.
             if needed.lower().replace(" ","") not in names:
