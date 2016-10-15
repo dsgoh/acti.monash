@@ -22,8 +22,6 @@ try:
     import details  # extracts details to file "details.txt"
     details.details(f)
 
-
-
     ExtractSections.error_gateway(name+"."+extension, "crashes.txt","Mode.txt","sleepfile.csv")
     error = open("crashes.txt").readline()
     if error!="None":
@@ -45,25 +43,20 @@ try:
 
     # uses "sleepindex.csv" to plot
     import plotter
-    plotter.plot("sleepindex.csv")
 
+    f.close()
+    f = open("worked.txt", "w")
+    f.write("True")
     f.close()
     ef = open("Error_Log.txt", "w")
     ef.write("")
     ef.close()
-    f = open("ProgramStatus.txt", "w")
-    f.write("normal")
-    f.close()
 except MyError:
-    f = open("ProgramStatus.txt", "w")
-    f.write("normal")
-    f.close()
+    pass
 except Exception:
     exc_type, exc_obj, exc_tb = sys.exc_info()
+
     ef = open("Error_Log.txt","w")
     traceback.print_exc(file = ef)
     ef.close()
-    f = open("ProgramStatus.txt", "w")
-    f.write("crashed")
-    f.close()
 

@@ -1,10 +1,19 @@
 Traceback (most recent call last):
-  File "D:/documents/computing/finalcomputingassignment/acti.monash-master/main.py", line 41, in <module>
-    plotter.plot("sleepindex.csv")
-  File "D:\documents\computing\finalcomputingassignment\acti.monash-master\plotter.py", line 43, in plot
-    unixTimes.append(time.mktime(datetime.datetime.strptime(smth, "%d/%m/%Y %H:%M:%S").timetuple()))
-  File "C:\Users\Paro\Anaconda3\lib\_strptime.py", line 510, in _strptime_datetime
-    tt, fraction = _strptime(data_string, format)
-  File "C:\Users\Paro\Anaconda3\lib\_strptime.py", line 346, in _strptime
-    data_string[found.end():])
-ValueError: unconverted data remains: pm
+  File "C:\Users\Paro\Anaconda3\lib\site-packages\plotly\plotly\plotly.py", line 703, in get
+    return_data = json.loads(res.content)
+  File "C:\Users\Paro\Anaconda3\lib\json\__init__.py", line 312, in loads
+    s.__class__.__name__))
+TypeError: the JSON object must be str, not 'bytes'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:/documents/computing/finalcomputingassignment/version3/acti.monash-master/main.py", line 45, in <module>
+    import plotter
+  File "D:\documents\computing\finalcomputingassignment\version3\acti.monash-master\plotter.py", line 109, in <module>
+    py.image.save_as(fig, filename="full.png")
+  File "C:\Users\Paro\Anaconda3\lib\site-packages\plotly\plotly\plotly.py", line 787, in save_as
+    img = cls.get(figure_or_data, format, width, height, scale)
+  File "C:\Users\Paro\Anaconda3\lib\site-packages\plotly\plotly\plotly.py", line 707, in get
+    raise exceptions.PlotlyError("The response "
+plotly.exceptions.PlotlyError: The response from plotly could not be translated.

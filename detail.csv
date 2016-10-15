@@ -23,20 +23,12 @@ Number of Processor Resets: 0
 Actiwatch Serial Number: V963259
 Actiwatch Firmware Version: 96
 Activity Calibration Factor: 110
-White Calibration Factor: Not Applicable
-Red Calibration Factor: Not Applicable
-Green Calibration Factor: Not Applicable
-Blue Calibration Factor: Not Applicable
 Wake Threshold Selection: Medium
 Wake Threshold Value: 40.00 activity counts
 Sleep Interval Detection Algorithm: By minutes scored as immobile
 Sleep Onset Setting: 10 minutes
 Sleep End Setting: 10 minutes
 Actogram Start Hour: 12:00 PM
-White Light Threshold: Not Applicable
-Red Light Threshold: Not Applicable
-Green Light Threshold: Not Applicable
-Blue Light Threshold: Not Applicable
 Line: Line Number
 Epoch: Epoch Number (since midnight prior to start of data collection)
 Date: Date (start of epoch)
