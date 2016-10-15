@@ -51,11 +51,11 @@ try:
     ef = open("Error_Log.txt", "w")
     ef.write("")
     ef.close()
-    f = open("ProgramStatus.txt")
+    f = open("ProgramStatus.txt", "w")
     f.write("normal")
     f.close()
 except MyError:
-    f = open("ProgramStatus.txt")
+    f = open("ProgramStatus.txt", "w")
     f.write("normal")
     f.close()
 except Exception:
@@ -63,7 +63,7 @@ except Exception:
     ef = open("Error_Log.txt","w")
     traceback.print_exc(file = ef)
     ef.close()
-    f = open("ProgramStatus.txt")
+    f = open("ProgramStatus.txt", "w")
     f.write("crashed")
     f.close()
 
