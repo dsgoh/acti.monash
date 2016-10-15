@@ -111,6 +111,7 @@ for colour in range(4):
         ax = plt.gca()
         for point in lines[colour][i]:
             if colour!=0:
+                ax.set_yscale("log")
                 ax.bar(math.log10(point[1]),point[2],(math.log10(point[0])-math.log10(point[1])),color = colourTrans[colour][1])
             else:
                 ax.bar(point[1], point[2], (point[0] - point[1]),color=colourTrans[colour][1])
