@@ -48,18 +48,22 @@ try:
     plotter.plot("sleepindex.csv")
 
     f.close()
-    f = open("worked.txt", "w")
-    f.write("True")
-    f.close()
     ef = open("Error_Log.txt", "w")
     ef.write("")
     ef.close()
+    f = open("ProgramStatus.txt")
+    f.write("normal")
+    f.close()
 except MyError:
-    pass
+    f = open("ProgramStatus.txt")
+    f.write("normal")
+    f.close()
 except Exception:
     exc_type, exc_obj, exc_tb = sys.exc_info()
-
     ef = open("Error_Log.txt","w")
     traceback.print_exc(file = ef)
     ef.close()
+    f = open("ProgramStatus.txt")
+    f.write("crashed")
+    f.close()
 
