@@ -1,7 +1,6 @@
 package acti.monash.gui;
 
 import java.awt.Image;
-import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -11,7 +10,7 @@ import javax.imageio.ImageIO;
 
 public class GraphImages
 {
-	public static ArrayList<BufferedImage> dailyData1 = new ArrayList<BufferedImage>();
+	public static ArrayList<Image> dailyData = new ArrayList<Image>();
 
 	public static Image whiteCountAsleep;
 	public static Image whiteProbability;
@@ -40,6 +39,29 @@ public class GraphImages
 			greenProbability = ImageIO.read(new File(PythonRunner.pythonLocation + "Green Probability.png")).getScaledInstance(miscGraphWidth, miscGraphHeight, Image.SCALE_SMOOTH);
 			blueCountAsleep = ImageIO.read(new File(PythonRunner.pythonLocation + "Blue Count_Asleep.png")).getScaledInstance(miscGraphWidth, miscGraphHeight, Image.SCALE_SMOOTH);
 			blueProbability = ImageIO.read(new File(PythonRunner.pythonLocation + "Blue Probability.png")).getScaledInstance(miscGraphWidth, miscGraphHeight, Image.SCALE_SMOOTH);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+
+		try
+		{
+			int dailyGraphHeight = 300;
+			int day = 0;
+			while (true)
+			{
+				File file = new File(PythonRunner.pythonLocation + "day" + day + ".png");
+				if (file.exists())
+				{
+					Image image = ImageIO.read(file);
+					dailyData.add(image.getScaledInstance((int) (dailyGraphHeight * ((float) image.getWidth(null) / image.getHeight(null))), dailyGraphHeight, Image.SCALE_SMOOTH));
+					// dailyData.add(image);
+
+				}
+				else break;
+				day += 1;
+			}
 		}
 		catch (Exception e)
 		{

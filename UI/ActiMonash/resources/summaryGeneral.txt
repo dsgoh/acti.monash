@@ -1,1 +1,1 @@
-Day by Day visualisation of data. (If we get it done, that is).
+Day by Day visualisation of data.

@@ -41,6 +41,7 @@ public class GuiMain extends JPanel
 	public JPanel[] tabPanels = new JPanel[3];
 
 	public JPanel mainGraphPanel;
+	public JPanel graphContainerGeneral;
 	public JPanel graphContainerMisc;
 	public JPanel[] scrollPaneViews;
 	public JLabel summaryLabel;
@@ -280,6 +281,11 @@ public class GuiMain extends JPanel
 		this.graphContainerMisc.setLayout(new ModifiedFlowLayout(FlowLayout.LEFT, 0, 0));
 		this.scrollPaneViews[1].add(this.graphContainerMisc);
 
+		this.graphContainerGeneral = new JPanel();
+		this.graphContainerGeneral.setOpaque(false);
+		this.graphContainerGeneral.setLayout(new BoxLayout(this.graphContainerGeneral, BoxLayout.Y_AXIS));
+		this.scrollPaneViews[0].add(this.graphContainerGeneral);
+
 		this.graphBoxes = new ArrayList<GuiGraphBox>();
 		// this.addGraphBoxes(this.scrollPaneViews[0], 10);
 		GuiGraphBox test = new GuiGraphBox("White Count Asleep", GraphImages.whiteCountAsleep);
@@ -295,6 +301,11 @@ public class GuiMain extends JPanel
 		this.graphContainerMisc.add(new GuiGraphBox("Green Probability", GraphImages.greenProbability));
 		this.graphContainerMisc.add(new GuiGraphBox("Blue Count Asleep", GraphImages.blueCountAsleep));
 		this.graphContainerMisc.add(new GuiGraphBox("Blue Probability", GraphImages.blueProbability));
+
+		for (int i = 0; i < GraphImages.dailyData.size(); i++)
+		{
+			this.graphContainerGeneral.add(new GuiGraphBox("Day " + (i + 1), GraphImages.dailyData.get(i), true, true));
+		}
 
 		this.detailsLabel = new JLabel(GraphImages.details);
 		this.detailsLabel.setBorder(new EmptyBorder(10, 10, 10, 10));

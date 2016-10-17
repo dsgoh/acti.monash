@@ -29,14 +29,13 @@ public class GuiGraphBox extends JPanel
 
 	public GuiGraphBox(String title, Image graphImage)
 	{
-		this(title, graphImage, true);
+		this(title, graphImage, true, false);
 	}
 
-	public GuiGraphBox(String title, Image graphImage, boolean showButtons)
+	public GuiGraphBox(String title, Image graphImage, boolean showButtons, boolean resizable)
 	{
 		this.setOpaque(false);
 		this.setLayout(new BorderLayout(0, 0));
-		// this.setAlignmentX(Component.LEFT_ALIGNMENT);
 		this.setBorder(new EmptyBorder(10, 10, 10, 10));
 
 		JPanel top = new JPanel();
@@ -60,12 +59,12 @@ public class GuiGraphBox extends JPanel
 		main.add(graphContainer, BorderLayout.CENTER);
 		graphContainer.setLayout(new BorderLayout(0, 0));
 
-		boolean scrollable = false;
+		boolean scrollable = resizable;
 
 		JScrollPane graphScrollPane = new JScrollPane();
 		graphScrollPane.setOpaque(false);
 		graphScrollPane.getViewport().setOpaque(false);
-		graphScrollPane.setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, GuiMain.panelColorGrey));
+		graphScrollPane.setBorder(null);
 		graphScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 		graphScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		if (!scrollable) graphScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -84,12 +83,23 @@ public class GuiGraphBox extends JPanel
 
 		if (graphImage != null)
 		{
-			int width = this.image.getPreferredSize().width + 30;
-			int height = this.image.getPreferredSize().height + 40 + top.getPreferredSize().height;
-			if (!scrollable) height += graphScrollPane.getVerticalScrollBar().getPreferredSize().width;
-			this.setPreferredSize(new Dimension(width, height));
-			this.setMaximumSize(new Dimension(width, height));
-			this.setMinimumSize(new Dimension(width, height));
+			int width = this.image.getPreferredSize().width + 25;
+			int height = this.image.getPreferredSize().height + 55 + top.getPreferredSize().height;
+			if (scrollable) height += graphScrollPane.getHorizontalScrollBar().getPreferredSize().height;
+
+			if (resizable)
+			{
+				this.image.setBorder(BorderFactory.createMatteBorder(5, 5, 0, 5, GuiMain.panelColorGrey));
+				this.setPreferredSize(new Dimension(0, height - 5));
+				this.setMaximumSize(new Dimension(width * 2, height - 5));
+				this.setMinimumSize(new Dimension(0, height - 5));
+			}
+			else
+			{
+				this.setPreferredSize(new Dimension(width, height));
+				this.setMaximumSize(new Dimension(width, height));
+				this.setMinimumSize(new Dimension(width, height));
+			}
 		}
 		else this.setPreferredSize(new Dimension(0, 200));
 

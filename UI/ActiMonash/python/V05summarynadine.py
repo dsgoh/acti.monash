@@ -198,5 +198,5 @@ def summary(f):
     out.write('Avg'+",")
     out.write(avg_bedtime+","+avg_get_up_time+","+avg_time_in_bed+","+avg_total_sleep_hours+","+avg_onset_latency+","+avg_efficiency+","+avg_waso+","+avg_awakenings)
     out.close()
-
+    
     f.close()

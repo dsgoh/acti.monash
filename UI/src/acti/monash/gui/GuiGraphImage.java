@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
 public class GuiGraphImage extends JPanel
@@ -15,6 +16,7 @@ public class GuiGraphImage extends JPanel
 	public GuiGraphImage(Image image)
 	{
 		this.setBackground(Color.WHITE);
+		this.setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, GuiMain.panelColorGrey));
 		this.setImage(image);
 	}
 

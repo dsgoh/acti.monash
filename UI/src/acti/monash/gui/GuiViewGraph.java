@@ -18,9 +18,9 @@ public class GuiViewGraph extends JPanel
 
 	public GuiViewGraph(String title, Image graphImage)
 	{
-		GuiGraphBox graphBox = new GuiGraphBox(title, graphImage, false);
+		GuiGraphBox graphBox = new GuiGraphBox(title, graphImage, false, false);
 		this.frame = new GuiFrame();
-		Dimension frameSize = new Dimension(graphBox.getPreferredSize().width + 35, graphBox.getPreferredSize().height + 85);
+		Dimension frameSize = new Dimension(graphBox.getPreferredSize().width + 25, graphBox.getPreferredSize().height + 74);
 		this.frame.setMinimumSize(frameSize);
 		this.frame.setSize(frameSize);
 		this.frame.setPreferredSize(frameSize);
